@@ -62,23 +62,24 @@ jobs:
           files:
              kubernetes/development/*.yaml
         env:
-          NAMESPACE: abdelazizibrahim
+          NAMESPACE: karim_khaled
           REPLICAS: ${{ vars.REPLICAS }}
-          IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+          IMAGE: githubactionsiti2025.azurecr.io/${{ secrets.DOCKER_USERNAME }}/ga-application:${{ github.sha }}
+
 
       - name: Show processed manifests
         run: cat kubernetes/development/*.yaml
 
       - name: Ensure Namespace Exists
         run: |
-            if ! kubectl get namespace abdelazizibrahim; then
-            kubectl create namespace abdelazizibrahim
+            if ! kubectl get namespace karim_khaled; then
+            kubectl create namespace karim_khaled
             fi
 
       - name: Create MongoDB secret
         run: |
-            kubectl -n abdelazizibrahim delete secret mongo-db-creds --ignore-not-found
-            kubectl -n abdelazizibrahim create secret generic mongo-db-creds \
+            kubectl -n karim_khaled delete secret mongo-db-creds --ignore-not-found
+            kubectl -n karim_khaled create secret generic mongo-db-creds \
             --from-literal=MONGO_URI=${{ env.MONGO_URI }} \
             --from-literal=MONGO_USERNAME=${{ env.MONGO_USERNAME }} \
             --from-literal=MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}

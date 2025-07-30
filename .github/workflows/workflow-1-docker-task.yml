@@ -1,4 +1,4 @@
-name: Abdelaziz Ibrahim - Docker Image
+name: Karim Khaled - Docker Image
 
 on:
   workflow_dispatch:
@@ -13,12 +13,12 @@ jobs:
 
       - name: Docker Build
         run: |
-          docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/abdelaziz_ibrahim:v1.0 .
+          docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim)khaled:latest .
 
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login githubactionsiti2025.azurecr.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Docker Publish
         run: |
-          docker push githubactionsiti2025.azurecr.io/${{ secrets.DOCKER_USERNAME }}/abdelaziz_ibrahim:v1.0
+          docker push githubactionsiti2025.azurecr.io/${{ secrets.DOCKER_USERNAME }}/karim)khaled:latest
 
