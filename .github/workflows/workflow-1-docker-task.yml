@@ -20,6 +20,7 @@ jobs:
 
       - name: Docker Publish
         run: |
-          docker push ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKERHUB_USERNAME }}/karim_khaled:latest
+          docker push ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:latest
+
 
 
