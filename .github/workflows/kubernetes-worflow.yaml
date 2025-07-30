@@ -99,7 +99,7 @@ jobs:
       uses: azure/k8s-set-context@v3
       with:
         method: kubeconfig
-        kubeconfig: ${{ env.KUBECONFIG }}
+        kubeconfig: ${{ secrets.KUBECONFIG }}
 
     - name: Fetch Kubernetes Cluster Details
       run: |
