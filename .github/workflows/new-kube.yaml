@@ -69,11 +69,11 @@ jobs:
       - name: Show processed manifests
         run: cat kubernetes/development/*.yaml
 
-      - name: Create Namespace if not exists
+      - name: Ensure Namespace Exists
         run: |
-             kubectl get namespace abdelazizibrahim || \
-             kubectl create namespace ${{ vars.NAMESPACE }}
-        
+            if ! kubectl get namespace abdelazizibrahim; then
+            kubectl create namespace abdelazizibrahim
+            fi
 
       - name: Create MongoDB secret
         run: |
