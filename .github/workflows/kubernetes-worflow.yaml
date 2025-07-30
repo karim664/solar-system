@@ -90,11 +90,9 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
-    - name: Decode kubeconfig
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig
-        echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
-
+    - name: Set KUBECONFIG environment variable
+      run: echo "KUBECONFIG=$GITHUB_WORKSPACE/iticonfig.yaml" >> $GITHUB_ENV
+      
     - name: Set Kubeconfig Context
       uses: azure/k8s-set-context@v3
       with:
