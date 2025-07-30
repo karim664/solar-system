@@ -15,9 +15,10 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:${{ github.sha }} .
 
-      - name: Docker Login
+      - name: Docker Build
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ secrets.DOCKER_SERVER }} -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+         echo "Image Tag: ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:${{ github.sha }}"
+         docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:${{ github.sha }} .
 
       - name: Docker Publish
         run: |
