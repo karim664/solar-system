@@ -77,12 +77,11 @@ jobs:
 
       - name: Create MongoDB secret
         run: |
+            kubectl -n abdelazizibrahim delete secret mongo-db-creds --ignore-not-found
             kubectl -n abdelazizibrahim create secret generic mongo-db-creds \
             --from-literal=MONGO_URI=${{ env.MONGO_URI }} \
             --from-literal=MONGO_USERNAME=${{ env.MONGO_USERNAME }} \
-            --from-literal=MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
-            --dry-run=client \
-            -o yaml | kubectl apply -f -
+            --from-literal=MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}
 
       - name: Deploy manifests
         run: kubectl apply -f kubernetes/development
