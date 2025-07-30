@@ -90,10 +90,20 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
+    - name: Decode kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig
+        echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
+
+    - name: Set Kubeconfig Context
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
 
     - name: Fetch Kubernetes Cluster Details
       run: |
-        ## kubectl version --short
+
         kubectl version
         echo "-----------------------------------------"
         kubectl get nodes
