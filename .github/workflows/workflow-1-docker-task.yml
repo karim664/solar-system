@@ -13,12 +13,12 @@ jobs:
 
       - name: Docker Build
         run: |
-          docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:latest .
+          docker build -t ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:${{ github.sha }} .
 
       - name: Docker Login
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login githubactionsiti2025.azurecr.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ secrets.DOCKER_SERVER }} -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Docker Publish
         run: |
-          docker push githubactionsiti2025.azurecr.io/${{ secrets.DOCKER_USERNAME }}/karim_khaled:latest
-
+          docker push ${{ secrets.DOCKER_SERVER }}/${{ secrets.DOCKER_USERNAME }}/karim_khaled:${{ github.sha }}
