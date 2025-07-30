@@ -9,10 +9,10 @@ on:
 #       - 'feature/*'
 
 
-# env:
-#   MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
-#   MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
-#   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+env:
+  MONGO_URI: 'github-actions-iti-2025.global.mongocluster.cosmos.azure.com'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
 
 jobs:
@@ -34,6 +34,7 @@ jobs:
       context: .
       push: true
       tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+    
   dev-deploy:
     name: Deploy to Dev Env
     runs-on: ubuntu-latest

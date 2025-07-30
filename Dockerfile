@@ -1,3 +1,6 @@
+# FROM nginx:alpine
+# COPY ./index.html /usr/share/nginx/html/index.html
+
 FROM node:18-alpine3.17
 
 WORKDIR /usr/app
