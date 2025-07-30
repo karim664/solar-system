@@ -90,14 +90,6 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
-    - name: Set KUBECONFIG environment variable
-      run: echo "KUBECONFIG=$GITHUB_WORKSPACE/iticonfig.yaml" >> $GITHUB_ENV
-      
-    - name: Set Kubeconfig Context
-      uses: azure/k8s-set-context@v3
-      with:
-        method: kubeconfig
-        kubeconfig: ${{ secrets.KUBECONFIG }}
 
     - name: Fetch Kubernetes Cluster Details
       run: |
@@ -138,4 +130,4 @@ jobs:
 
 
     - name: Deploy manifests
-      run: kubectl apply -f kubernetes/development
+      run: kubectl apply -n abdelazizibrahim -f kubernetes/development
